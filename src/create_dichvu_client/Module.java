@@ -1,6 +1,5 @@
 package create_dichvu_client;
 
-import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
