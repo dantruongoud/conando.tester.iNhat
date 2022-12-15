@@ -76,18 +76,14 @@ public class indexPage {
         System.out.println("=======================");
     }
 
-    public String getNoti() {
+    public String getNoti() throws Exception {
 
         indexPage[] validation = {
-                new indexPage("emailErr"),
-                new indexPage("pwErr"),
-                new indexPage("login-error-msg"),
                 new indexPage("emailRegisterErr"),
                 new indexPage("pwRegisterErr"),
                 new indexPage("pwConfirmRegisterErr"),
                 new indexPage("robotRegisterErr"),
                 new indexPage("register-error"),
-                new indexPage("vietnamese_name_add_error"),
                 new indexPage("address_add_error"),
                 new indexPage("phone_add_error"),
                 new indexPage("email_add_error"),
@@ -98,11 +94,14 @@ public class indexPage {
                 new indexPage("contact_person_name_add_error"),
                 new indexPage("contact_person_phone_add_error"),
                 new indexPage("provinces_error"),
-                
+                new indexPage("vietnamese_name_add_error"),
+
         };
         String notify_text = "";
         for (int i = 0; i < validation.length; i++) {
-            notify_text = driver.findElement(By.id(validation[i].idElement)).getText().strip();
+            WebElement noti = driver.findElement(By.id(validation[i].idElement));
+            Thread.sleep(1000);
+            notify_text = noti.getText().strip();
             if (notify_text.length() > 0) {
                 System.out.println(notify_text);
                 break;

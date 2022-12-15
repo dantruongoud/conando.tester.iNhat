@@ -53,7 +53,6 @@ public class Module {
     public void setTextEdit(String name, String add, String phone, String email, String website, String owner,
             String nameContact, String phoneContact) {
         try {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
             WebElement name_company = profile_edit.findElement(By.name("vietnamese_name"));
             WebElement address = profile_edit.findElement(By.name("address"));
             WebElement phone_input = profile_edit.findElement(By.name("phone"));
@@ -62,6 +61,7 @@ public class Module {
             WebElement owner_input = profile_edit.findElement(By.name("owner"));
             WebElement name_contact = profile_edit.findElement(By.name("contact_person_name"));
             WebElement phone_contact = profile_edit.findElement(By.name("contact_person_phone"));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView();", name_company);
             Thread.sleep(1000);
             name_company.sendKeys(name);

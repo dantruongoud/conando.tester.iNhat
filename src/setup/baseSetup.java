@@ -17,15 +17,17 @@ public class baseSetup {
 	public WebDriver initChromeDriver() {
 
 		ChromeOptions useragent = new ChromeOptions();
+		indexPage index = new indexPage(driver);
 		useragent.addArguments("disable-notifications");
 
 		driver = new ChromeDriver(useragent);
 		System.out.println("Launching Chrome browser...");
 		driver.manage().window().maximize();
 		driver.get("https://inhat.com.vn/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(40));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
 
+		index.waitForPageLoaded();
 		return driver;
 	}
 
