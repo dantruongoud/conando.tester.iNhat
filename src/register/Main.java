@@ -1,19 +1,12 @@
 package register;
 
 import org.openqa.selenium.WebDriver;
+
+import excelHelpers.excelhelpers;
 import setup.baseSetup;
 import setup.indexPage;
 
 public class Main {
-	int testcase;
-	String username, password, confirmpass;
-
-	public Main(int testcase, String username, String password, String confirmpass) {
-		this.testcase = testcase;
-		this.username = username;
-		this.password = password;
-		this.confirmpass = confirmpass;
-	}
 
 	public static void main(String[] args) throws InterruptedException {
 		try {
@@ -21,28 +14,21 @@ public class Main {
 			WebDriver driver = init.initChromeDriver();
 			Module register = new Module(driver);
 			indexPage index = new indexPage(driver);
+			excelhelpers excel = new excelhelpers();
+			excel.setExcelSheet("register");
 
 			index.waitForPageLoaded();
 			register.navigationRegister();
 			index.waitForPageLoaded();
 
-			Main[] data = {
-					new Main(1, "", "dantruong2410", "dantruong2410"),
-					new Main(2, "ndtruong.conando", "dantruong2410", "dantruong2410"),
-					new Main(3, "email1@gmail.com", "", ""),
-					new Main(5, "email1@gmail.com", "dantruong2410", "123456"),
-					new Main(6, "email1@gmail.com", "123456", "123456"),
-					new Main(7, "email1@gmail.com", "dantruong2410", "dantruong2410"),
-					new Main(8, "mail123@gmail.com", "dantruong2410", "dantruong2410"),
-			};
-
-			for (int i = 0; i < data.length; i++) {
+			for (int i = 1; i < 8; i++) {
 				System.out.println("=======================");
-				System.out.println("Testcase: " + data[i].testcase);
-				register.setText(data[i].username, data[i].password, data[i].confirmpass);
+				System.out.println("Testcase: " + excel.getCellData("TCID", i));
+				register.setText(excel.getCellData("username", i), excel.getCellData("password", i),
+						excel.getCellData("confirmpass", i));
 				Thread.sleep(1200);
 
-				String noti = index.getNoti();
+				String noti = register.getNoti();
 				switch (noti) {
 					case "Không được để trống trường này":
 						System.out.println(noti);
@@ -72,7 +58,7 @@ public class Main {
 						register.checkbox.click();
 						break;
 					default:
-						noti = index.getNoti();
+						noti = register.getNoti();
 						if (noti.length() == 0) {
 							System.out.println("Đăng ký thành công, xác thực tại email");
 							index.passed();

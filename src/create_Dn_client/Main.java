@@ -18,7 +18,7 @@ public class Main {
 			indexPage index = new indexPage(driver);
 			formCreatePage formCreate = new formCreatePage(driver);
 			excelhelpers excel = new excelhelpers();
-			excel.setExcelSheet("Step 1->3 createDN - Client");
+			excel.setExcelSheet("Step1-step3 createDN - Client");
 
 			index.waitForPageLoaded();
 			login.navigation_login.click();

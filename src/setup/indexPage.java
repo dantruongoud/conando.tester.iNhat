@@ -79,10 +79,6 @@ public class indexPage {
     public String getNoti() throws Exception {
 
         indexPage[] validation = {
-                new indexPage("emailRegisterErr"),
-                new indexPage("pwRegisterErr"),
-                new indexPage("pwConfirmRegisterErr"),
-                new indexPage("robotRegisterErr"),
                 new indexPage("register-error"),
                 new indexPage("address_add_error"),
                 new indexPage("phone_add_error"),

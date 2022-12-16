@@ -9,6 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 public class Module {
 
 	WebDriver driver;
+	String idElement;
+
+	public Module(String idElement) {
+		this.idElement = idElement;
+	}
 
 	@FindBy(css = ".btn-user-singup")
 	private WebElement navigation_register;
@@ -63,6 +68,26 @@ public class Module {
 	public boolean verify_login() {
 		String text = verify_mail.getText().strip();
 		return text.equals("Nhập mã xác thực");
+	}
+
+	public String getNoti() throws Exception {
+		Module[] listnoti = {
+				new Module("emailRegisterErr"),
+				new Module("pwRegisterErr"),
+				new Module("pwConfirmRegisterErr"),
+				new Module("robotRegisterErr")
+		};
+		String notify = "";
+		for (int i = 0; i < listnoti.length; i++) {
+			WebElement noti = driver.findElement(By.id(listnoti[i].idElement));
+			Thread.sleep(1000);
+			notify = noti.getText().strip();
+			if (notify.length() > 0) {
+				System.out.println(notify);
+				break;
+			}
+		}
+		return notify;
 	}
 
 	public static String register(WebDriver driver) {
