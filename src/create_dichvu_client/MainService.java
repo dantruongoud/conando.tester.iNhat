@@ -2,19 +2,11 @@ package create_dichvu_client;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import setup.baseSetup;
 import setup.indexPage;
 
 public class MainService {
-
-    int testcase;
-    String nameService, title_service;
-
-    public MainService(int testcase, String nameService, String title_service) {
-        this.testcase = testcase;
-        this.nameService = nameService;
-        this.title_service = title_service;
-    }
 
     public static void main(String[] args) {
         try {
@@ -23,6 +15,8 @@ public class MainService {
             login.Module login = new login.Module(driver);
             indexPage index = new indexPage(driver);
             create_dichvu_client.Module servicePage = new create_dichvu_client.Module(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Tạo Dịch vụ");
 
             index.waitForPageLoaded();
             login.navigation_login.click();
@@ -48,19 +42,15 @@ public class MainService {
             if (noti.equals("*Vui lòng thêm gói dịch vụ")) {
                 System.out.println(noti);
                 index.passed();
+
                 servicePage.serviceTitle_input.clear();
                 servicePage.addBtn.click();
 
-                MainService[] data = {
-                        new MainService(2, "", "noti"),
-                        new MainService(3, "Dịch vụ kiểm thử tự động", ""),
-                        new MainService(4, "Dịch vụ kiểm thử tự động", "Gói định kỳ theo tháng")
-                };
-
-                for (int i = 0; i < data.length; i++) {
+                for (int i = 1; i < 4; i++) {
                     System.out.println("=======================");
-                    System.out.println("Testcase: " + data[i].testcase);
-                    servicePage.setText(data[i].nameService, data[i].title_service);
+
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    servicePage.setText(excel.getCellData("nameService", i), excel.getCellData("titleService", i));
                     Thread.sleep(1000);
 
                     noti = index.getNotiClass();

@@ -119,7 +119,7 @@ public class indexPage {
                 Thread.sleep(1000);
                 notify_text = driver.findElement(By.xpath(validation[i].idElement)).getText().strip();
                 if (notify_text.length() > 0) {
-                    System.out.println(notify_text);
+                    System.out.println("Notify: " + notify_text);
                     break;
                 }
             }

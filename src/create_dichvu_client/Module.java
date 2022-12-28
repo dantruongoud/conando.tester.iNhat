@@ -58,7 +58,7 @@ public class Module {
         PageFactory.initElements(driver, this);
     }
 
-    indexPage index = new indexPage(driver);
+    private indexPage index = new indexPage(driver);
 
     public void openForm() {
         try {

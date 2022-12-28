@@ -84,8 +84,10 @@ public class Main {
 				formCreate.infoCompany.sendKeys("This's infomation my Company");
 				System.out.println("=======================");
 				System.out.println("Testcase: 10");
+
 				String noti = index.getNoti();
 				if (noti.equals("Không được để trống trường này")) {
+					
 					System.out.println(noti);
 					index.upfile("css", ".fw-400.font-14.lh-18");
 					index.passed();
